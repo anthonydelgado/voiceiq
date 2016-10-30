@@ -1,0 +1,32 @@
+extends layout
+
+block content
+
+  if (!user)
+
+    .container
+      .row
+
+        .col.s12.m6.offset-m3
+          h3.center Login
+          br
+          form(role='form', action="/login",method="post" )
+            .input-field
+              input(type='email', name="username", placeholder='Email', value="")
+            .input-field
+              input(type='password', name="password", placeholder='Password', value="")
+            .center
+              button.btn.light-blue.darken-4(type='submit') Login
+
+
+
+  if (user)
+    .container
+      h3.center Connect with to VoiceIQ
+      p.flow-text.center You are currently logged in as #{user.username}
+      .row.center
+        a(href="/logout").btn.light-blue.darken-4 Logout
+        br
+
+
+    //include  templates/room.html

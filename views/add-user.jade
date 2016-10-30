@@ -1,0 +1,17 @@
+extends layout
+
+block content
+
+    if (user)
+        .col.s12.m6
+            h3.center Signup
+            br
+            form(role='form', action="/register",method="post" )
+                .input-field
+                    input(type='text', name="username", placeholder='Enter Email', value="")
+                .input-field
+                    input(type='number', name="phone", placeholder='Enter Phone Number', value="")
+                .input-field
+                    input(type='password', name="password", placeholder='Password', value="")
+
+                button.btn.light-blue.darken-4(type='submit') Signup
