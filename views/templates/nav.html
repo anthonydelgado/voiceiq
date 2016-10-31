@@ -1,23 +1,13 @@
-<nav class="light-blue darken-3">
-    <div class="nav-wrapper">
-        <a href="/" class="brand-logo center">
-            <img src="../images/logo.png" alt="Voice IQ" style="height: 58px">
-        </a>
-        <ul class="right">
-            <li><a href="sass.html"><i class="material-icons">search</i></a></li>
-            <li class="hide-on-med-and-down"><a href="badges.html"><i class="material-icons">view_module</i></a></li>
-            <li class="hide-on-med-and-down"><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
-            <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>
-        </ul>
-    </div>
-</nav>
-
-nav.light-blue.darken-3
-    .nav-wrapper
-        a.brand-logo.center(href='/')
-            img(src='../images/logo.png')
-        ul.right
-            li
-                a(href='/')
-                    i.material-icons
-                        search
+<ul id="slide-out" class="side-nav hide-on-med-and-down z-depth-0 grey lighten-5" style="transform: translateX(0px); ">
+    <li class="light-blue darken-3"><div class="userView">
+        <img class="background" src="images/office.jpg">
+        <a href="#!user"><img class="circle" src="images/yuna.jpg"></a>
+        <a href="#!name"><span class="white-text name">John Doe</span></a>
+        <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
+    </div></li>
+    <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+    <li><a href="#!">Second Link</a></li>
+    <li><div class="divider"></div></li>
+    <li><a class="subheader">Subheader</a></li>
+    <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+</ul>

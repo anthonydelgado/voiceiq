@@ -18,19 +18,41 @@ html
               a(href='/')
                 i.material-icons search
 
-            li
+            li.hide-on-med-and-down
               a(href='/')
                 i.material-icons view_module
 
-            li
+            li.hide-on-med-and-down
               a(href='/')
                 i.material-icons refresh
 
             li
               a(href='/')
                 i.material-icons more_vert
+    if (user)
+      ul#slide-out.side-nav.hide-on-med-and-down.z-depth-0.grey.lighten-5(style='transform: translateX(0px); ')
+        li.light-blue.darken-3
+          .userView
+            //img.background(src='images/office.jpg')
+            a(href='#!user')
+              img.circle(src='#{grav}')
+            a(href='#!name')
+              span.white-text.name Email: #{user.username}
+            a(href='#!email')
+              span.white-text.email Key: #{user.id}
+        li
+          a(href='#!')
+            i.material-icons cloud
+            | First Link With Icon
+        li
+          a(href='#!') Second Link
+        li
+          .divider
+        li
+          a.subheader Subheader
+        li
+          a.waves-effect(href='#!') Third Link With Waves
 
-    //include templates/nav.html
 
     .container
       block content

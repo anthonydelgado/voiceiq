@@ -2,28 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ae22c54-9de2-4c66-9b95-07d8a0851e83" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/bg.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/logo-ru.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/account.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/randos.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/main.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/recording.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/type.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/typed.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/videochat.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/add-user.jade" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/javascripts/main.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/javascripts/recording.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/javascripts/type.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/javascripts/typed.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/javascripts/videochat.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/templates/home-hero.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/templates/nav.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/templates/room.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/templates/userlist.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/callrecords.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/index.jade" afterPath="$PROJECT_DIR$/views/index.jade" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/layout.jade" afterPath="$PROJECT_DIR$/views/layout.jade" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/templates/nav.html" afterPath="$PROJECT_DIR$/views/templates/nav.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/templates/room.html" afterPath="$PROJECT_DIR$/views/templates/room.html" />
     </list>
     <ignored path="voiceiq.iws" />
     <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/dataSources.local.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,6 +38,9 @@
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="PhpServers">
+    <servers />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
@@ -109,6 +102,9 @@
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
