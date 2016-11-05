@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ae22c54-9de2-4c66-9b95-07d8a0851e83" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
     </list>
     <ignored path="voiceiq.iws" />
@@ -26,8 +27,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="57" column="6" selection-start-line="57" selection-start-column="6" selection-end-line="57" selection-end-column="6" />
+            <state relative-caret-position="600">
+              <caret line="135" column="35" selection-start-line="135" selection-start-column="35" selection-end-line="135" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -61,7 +62,11 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="593">
               <caret line="65" column="31" selection-start-line="65" selection-start-column="31" selection-end-line="65" selection-end-column="31" />
-              <folding />
+              <folding>
+                <marker date="1478384585000" expanded="true" signature="17:2282" ph="..." />
+                <marker date="1478384585000" expanded="true" signature="366:2282" ph="..." />
+                <marker date="1478384585000" expanded="true" signature="1708:1728" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -311,12 +316,12 @@
       <updated>1477618010224</updated>
       <workItem from="1477618011525" duration="1438000" />
       <workItem from="1478246484278" duration="568000" />
-      <workItem from="1478373729372" duration="5248000" />
+      <workItem from="1478373729372" duration="6420000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7254000" />
+    <option name="totallyTimeSpent" value="8426000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1680" height="962" extended-state="6" />
@@ -413,7 +418,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="593">
           <caret line="65" column="31" selection-start-line="65" selection-start-column="31" selection-end-line="65" selection-end-column="31" />
-          <folding />
+          <folding>
+            <marker date="1478384585000" expanded="true" signature="17:2282" ph="..." />
+            <marker date="1478384585000" expanded="true" signature="366:2282" ph="..." />
+            <marker date="1478384585000" expanded="true" signature="1708:1728" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -427,8 +436,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="57" column="6" selection-start-line="57" selection-start-column="6" selection-end-line="57" selection-end-column="6" />
+        <state relative-caret-position="600">
+          <caret line="135" column="35" selection-start-line="135" selection-start-column="35" selection-end-line="135" selection-end-column="35" />
           <folding />
         </state>
       </provider>

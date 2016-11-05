@@ -110,13 +110,34 @@ router.get('/callrecordings', function (req, res) {
 
 router.get('/incoming', function (req, res) {
 
-        var twiml = new twilio.TwimlResponse();
 
-        twiml.say('Hi!  Thanks for checking out my app!')
-            .play('http://myserver.com/mysong.mp3');
+    // Create TwiML response
+    var twiml = new twilio.TwimlResponse();
 
-        res.type('text/xml');
-        res.send(twiml.toString());
+    if(req.body.To) {
+        twiml.dial({ callerId: '+12018758684'}, function() {
+            // wrap the phone number or client name in the appropriate TwiML verb
+            // by checking if the number given has only digits and format symbols
+            if (/^[\d\+\-\(\) ]+$/.test(req.body.To)) {
+                this.number(req.body.To);
+            } else {
+                this.client(req.body.To);
+            }
+        });
+    } else {
+        twiml.say("Thanks for calling!");
+    }
+
+    res.set('Content-Type', 'text/xml');
+    res.send(twiml.toString());
+        //
+        // var twiml = new twilio.TwimlResponse();
+        //
+        // twiml.say('Hi!  Thanks for checking out my app!')
+        //     .play('http://myserver.com/mysong.mp3');
+        //
+        // res.type('text/xml');
+        // res.send(twiml.toString());
 
 
 });
