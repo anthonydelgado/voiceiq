@@ -55,7 +55,7 @@ router.get('/google', function (req, res) {
  Generate a Capability Token for a Twilio Client user - it generates a random
  username for the client requesting a token.
  */
-app.get('/token', function(req, res) {
+router.get('/token', function(req, res) {
 
     if(req.user){
 
