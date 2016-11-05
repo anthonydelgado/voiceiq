@@ -1,7 +1,4 @@
-
 require('dotenv').load();
-
-
 var express = require('express');
 var passport = require('passport');
 var Account = require('../models/account');
