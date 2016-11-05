@@ -97,7 +97,14 @@ router.post('/incoming', function (req, res) {
         res.send(twiml.toString());
     }
     else {
-        res.send('you are not twilio.  Buzz off.');
+        var twiml = new twilio.TwimlResponse();
+
+        twiml.say('you are not twilio.  Buzz off.')
+            .play('http://myserver.com/mysong.mp3');
+
+        res.type('text/xml');
+        res.send(twiml.toString());
+         
     }
 
 
