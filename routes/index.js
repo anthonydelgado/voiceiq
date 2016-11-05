@@ -68,15 +68,25 @@ router.get('/callrecordings', function (req, res) {
             });
     });
 
-    // client.calls("CA18f0fcc020cc07fc52707742cdff7a2a").get(function(err, data) {
-    //     res.json(data);
-    // });
+});
 
-    // client.recordings.list(function(err, data) {
-    //     data.recordings.forEach(function(recording) {
-    //         console.log(recording.Duration);
-    //     });
-    // });
+
+router.post('/incoming', function (req, res) {
+
+    //Validate that this request really came from Twilio...
+    if (client.validateExpressRequest(req, '2a97b37e4a7cdd9bbd18b5b64cca1369')) {
+        var twiml = new twilio.TwimlResponse();
+
+        twiml.say('Hi!  Thanks for checking out my app!')
+            .play('http://myserver.com/mysong.mp3');
+
+        res.type('text/xml');
+        res.send(twiml.toString());
+    }
+    else {
+        res.send('you are not twilio.  Buzz off.');
+    }
+
 
 });
 
