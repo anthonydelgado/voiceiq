@@ -9,7 +9,7 @@ var gravatar = require('gravatar');
 var accountSid = 'AC920c9920faf15270c5394f690187585b';
 var authToken = "2a97b37e4a7cdd9bbd18b5b64cca1369";
 var client = require('twilio')(accountSid, authToken);
-
+var twilio = require('twilio');
 var router = express.Router();
 
 /* GET home page. */
@@ -71,10 +71,23 @@ router.get('/callrecordings', function (req, res) {
 });
 
 
+router.get('/incoming', function (req, res) {
+
+        var twiml = new twilio.TwimlResponse();
+
+        twiml.say('Hi!  Thanks for checking out my app!')
+            .play('http://myserver.com/mysong.mp3');
+
+        res.type('text/xml');
+        res.send(twiml.toString());
+
+
+});
+
 router.post('/incoming', function (req, res) {
 
     //Validate that this request really came from Twilio...
-    if (client.validateExpressRequest(req, '2a97b37e4a7cdd9bbd18b5b64cca1369')) {
+    if (twilio.validateExpressRequest(req, '2a97b37e4a7cdd9bbd18b5b64cca1369')) {
         var twiml = new twilio.TwimlResponse();
 
         twiml.say('Hi!  Thanks for checking out my app!')
