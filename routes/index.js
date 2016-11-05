@@ -91,7 +91,7 @@ router.post('/incoming', function (req, res) {
         var twiml = new twilio.TwimlResponse();
 
         twiml.say('Hi!  Thanks for checking out my app!')
-            .play('http://myserver.com/mysong.mp3');
+            .play('http://demo.twilio.com/hellomonkey/monkey.mp3');
 
         res.type('text/xml');
         res.send(twiml.toString());
@@ -100,11 +100,11 @@ router.post('/incoming', function (req, res) {
         var twiml = new twilio.TwimlResponse();
 
         twiml.say('you are not twilio.  Buzz off.')
-            .play('http://myserver.com/mysong.mp3');
+            .play('http://demo.twilio.com/hellomonkey/monkey.mp3');
 
         res.type('text/xml');
         res.send(twiml.toString());
-         
+
     }
 
 
