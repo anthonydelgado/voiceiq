@@ -8,19 +8,28 @@ var gravatar = require('gravatar');
 
 var accountSid = 'AC920c9920faf15270c5394f690187585b';
 var authToken = "2a97b37e4a7cdd9bbd18b5b64cca1369";
+var twimlAppSID = 'AP453137dfea43ec9d76b2b038f872c08f';
 var client = require('twilio')(accountSid, authToken);
 var twilio = require('twilio');
 var router = express.Router();
+
+
+var capability = new twilio.Capability(accountSid, authToken);
+
+
 
 /* GET home page. */
 
 router.get('/', function (req, res) {
     if(req.user){
+        capability.allowClientIncoming(req.user.username);
+        var token = capability.generate();
         var gravatarImage = gravatar.url(req.user.username, {s: '200', r: 'pg', d: 'retro'});
     }else{
         var gravatarImage = gravatar.url('emerleite@gmail.com', {s: '200', r: 'pg', d: 'retro'});
+        var token = '';
     }
-    res.render('index', { user : req.user, grav : gravatarImage });
+    res.render('index', { user : req.user, grav : gravatarImage, twiliotoken: token });
 });
 
 var google_speech = require('google-speech');
@@ -42,7 +51,35 @@ router.get('/google', function (req, res) {
     );
 });
 
+/*
+ Generate a Capability Token for a Twilio Client user - it generates a random
+ username for the client requesting a token.
+ */
+app.get('/token', function(req, res) {
 
+    if(req.user){
+
+        var identity = req.user.username;
+
+        var capability = new twilio.Capability(accountSid, authToken);
+        capability.allowClientOutgoing(twimlAppSID);
+        capability.allowClientIncoming(identity);
+        var token = capability.generate();
+
+        // Include identity and token in a JSON response
+        res.send({
+            identity: identity,
+            token: token
+        });
+
+    }else{
+        res.send({
+            identity: '',
+            token: ''
+        });
+    }
+
+});
 
 router.get('/recordings', function (req, res) {
     client.recordings.list(function(err, data) {

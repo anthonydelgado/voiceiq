@@ -56,8 +56,19 @@ html
 
     .container
       block content
+    #controls
+      #info
+        p.instructions Twilio Client
+        #client-name
+      #call-controls
+        p.instructions Make a Call:
+        input#phone-number(type='text', placeholder='Enter a phone # or client name')
+        button#button-call Call
+        button#button-hangup Hangup
+      #log
 
 
     script(src='bower_components/jquery/dist/jquery.js')
     script(src='/bower_components/materialize/dist/js/materialize.js')
+    script(src='https://media.twiliocdn.com/sdk/js/client/v1.3/twilio.min.js')
     script(src='/javascripts/main.js')
