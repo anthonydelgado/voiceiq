@@ -15,6 +15,11 @@ var twimlAppSID = 'AP453137dfea43ec9d76b2b038f872c08f';
 // https://www.twilio.com/console/phone-numbers/dev-tools/twiml-apps
 var client = require('twilio')(accountSid, authToken);
 var twilio = require('twilio');
+
+
+var AccessToken = require('twilio').AccessToken;
+var VideoGrant = AccessToken.VideoGrant;
+
 var router = express.Router();
 
 router.use(bodyParser.urlencoded({ extended: false }));
@@ -27,21 +32,21 @@ var capability = new twilio.Capability(accountSid, authToken);
 router.get('/', function (req, res) {
 
 
-    var query = Transcription.find().limit(10).exec(function () {
+    var query = Transcription.find().limit(10).sort([['_id', 'descending']]).exec(function () {
 
         // res.json(JSON.stringify(query));
         // res.send(query.emitted.fulfill[0]);
         var qList = query.emitted.fulfill[0];
 
         if(req.user){
-            capability.allowClientIncoming(req.user.username);
-            var token = capability.generate();
+
             var gravatarImage = gravatar.url(req.user.username, {s: '200', r: 'pg', d: 'retro'});
+
+            res.render('index', { user : req.user, grav : gravatarImage, list: qList });
+
         }else{
-            var gravatarImage = gravatar.url('emerleite@gmail.com', {s: '200', r: 'pg', d: 'retro'});
-            var token = '';
+            res.render('index', { user : req.user, list: qList });
         }
-        res.render('index', { user : req.user, grav : gravatarImage, twiliotoken: token, list: qList });
 
 
     });
@@ -49,10 +54,7 @@ router.get('/', function (req, res) {
 
 });
 
-//
-
-
-
+// Call Page
 router.get('/call/:sid', function (req, res) {
 
     // find each Transcription with a CallSid matching url
@@ -60,31 +62,45 @@ router.get('/call/:sid', function (req, res) {
 
         var calldata = query.emitted.fulfill[0];
 
-        res.render('call', { user : req.user, call: calldata });
+        if(req.user){
+
+            var gravatarImage = gravatar.url(req.user.username, {s: '200', r: 'pg', d: 'retro'});
+
+            res.render('call', { user : req.user, grav : gravatarImage, call: calldata });
+
+        }else{
+            res.render('call', { user : req.user, call: calldata });
+
+        }
+
+    });
+
+});
+
+
+router.get('/tag/:search', function (req, res) {
+
+
+    var query = Transcription.find({TranscriptionText : req.params.search}).limit(10).sort([['_id', 'descending']]).exec(function () {
+
+        // res.json(JSON.stringify(query));
+        // res.send(query.emitted.fulfill[0]);
+        var qList = query.emitted.fulfill[0];
+
+        if(req.user){
+
+            var gravatarImage = gravatar.url(req.user.username, {s: '200', r: 'pg', d: 'retro'});
+
+            res.render('index', { user : req.user, grav : gravatarImage, list: qList });
+
+        }else{
+            res.render('index', { user : req.user, list: qList });
+        }
+
 
     });
 
 
-
-});
-
-var google_speech = require('google-speech');
-
-
-
-
-router.get('/google', function (req, res) {
-    google_speech.ASR({
-            developer_key: 'AIzaSyCEZeOoM6VexRkeOHnlCPYbGTp0Sr4qGCM',
-            file: 'https://raw.githubusercontent.com/tksalesforce/static_assets/master/mission_bicycle/mission_bicycle_neutral.mp3',
-        }, function(err, httpResponse, xml){
-            if(err){
-                res.json(err);
-            }else{
-                res.json(httpResponse)
-            }
-        }
-    );
 });
 
 /*
@@ -121,6 +137,39 @@ router.get('/token', function(req, res) {
 
 });
 
+
+// Video Token
+
+router.get('/videotoken', function(request, response) {
+    var identity = request.user.username;
+    //
+    // TWILIO_ACCOUNT_SID=ACbda9e5f778d4e4c3eea4c2d7ecc4b2ac
+    // TWILIO_API_KEY=SK2745be1461dea7b1e7c5fbe402f8c9a7
+    // TWILIO_API_SECRET=6sTJp49PY3udRBGfIXnlqmOyzWeDGove
+    // TWILIO_CONFIGURATION_SID=VS463af735610bfaa0aa78d3cd52640e15
+
+    // Create an access token which we will sign and return to the client,
+    // containing the grant we just created
+    var token = new AccessToken(
+        'ACbda9e5f778d4e4c3eea4c2d7ecc4b2ac',
+        'SK2745be1461dea7b1e7c5fbe402f8c9a7',
+        '6sTJp49PY3udRBGfIXnlqmOyzWeDGove'
+    );
+
+    // Assign the generated identity to the token
+    token.identity = identity;
+
+    //grant the access token Twilio Video capabilities
+    var grant = new VideoGrant();
+    grant.configurationProfileSid = 'VS463af735610bfaa0aa78d3cd52640e15';
+    token.addGrant(grant);
+
+    // Serialize the token to a JWT string and include it in a JSON response
+    response.send({
+        identity: identity,
+        token: token.toJwt()
+    });
+});
 
 
 router.get('/recordings', function (req, res) {
@@ -271,6 +320,20 @@ router.post('/add', function(req, res) {
 
 router.get('/register', function(req, res) {
     res.render('register', { });
+});
+
+router.get('/videochat', function(req, res) {
+
+    if(req.user){
+
+        var gravatarImage = gravatar.url(req.user.username, {s: '200', r: 'pg', d: 'retro'});
+
+        res.render('videochat', { user : req.user, grav : gravatarImage });
+
+    }else{
+        res.render('videochat', { user : req.user });
+    }
+
 });
 
 router.post('/register', function(req, res) {

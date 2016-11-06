@@ -1,13 +1,22 @@
 extends layout
 
 block content
-
     .container
-      ul.collection
-          li.collection-item.avatar
-            a.playme(href=call.RecordingUrl,data-id=call.CallSid,target='_blank')
-              i.material-icons.circle.light-blue.darken-4 play_arrow
-            span.title.click-to-call-iq(data-call=call.From) #{call.From}
-            p #{call.TranscriptionText}
-            a.secondary-content.playme(href=call.RecordingUrl,target='_blank')
-              i.material-icons call_made
+      .row
+          .col.s12
+            .card.grey.lighten-4
+              .card-content
+                p.flow-text #{call.TranscriptionText}
+              .card-action
+                a.waves-effect.waves-light.btn.playme.light-blue.darken-3(href=call.RecordingUrl,data-id=call.CallSid,target='_blank')
+                  i.material-icons.left play_arrow
+                  | Listen
+                a.waves-effect.waves-light.btn.light-blue.darken-3(href='call/' + call.CallSid)
+                  i.material-icons.left textsms
+                  | Comment
+                a.waves-effect.waves-light.btn.light-blue.darken-3.click-to-call-iq(data-call=call.From)
+                  i.material-icons.left perm_phone_msg
+                  | Call
+                a.waves-effect.waves-light.btn.light-blue.darken-3
+                  i.material-icons.left videocam
+                  | Video

@@ -16,7 +16,7 @@ if (!navigator.webkitGetUserMedia && !navigator.mozGetUserMedia) {
 // from the room, if joined.
 window.addEventListener('beforeunload', leaveRoomIfJoined);
 
-$.getJSON('/token', function (data) {
+$.getJSON('/videotoken', function (data) {
     identity = data.identity;
     console.log(identity);
     // Create a Video Client and connect to Twilio
@@ -120,9 +120,6 @@ document.getElementById('button-preview').onclick = function () {
 
 // Activity log
 function log(message) {
-    // var logDiv = document.getElementById('log');
-    // logDiv.innerHTML += '<p>&gt;&nbsp;' + message + '</p>';
-    // logDiv.scrollTop = logDiv.scrollHeight;
     Materialize.toast(message, 4000);
 }
 

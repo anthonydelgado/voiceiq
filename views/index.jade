@@ -21,21 +21,26 @@ block content
 
 
   if (user)
+
     .container
-      //h3.center Connect with to VoiceIQ
-      //p.flow-text.center You are currently logged in as #{user.username}
-      .row.center
-        a(href="/logout").btn.light-blue.darken-4 Logout
-        br
-    .container
-      ul.collection
+      .row
         for item in list
-          li.collection-item.avatar
-            a.playme(href=item.RecordingUrl,data-id=item.CallSid,target='_blank')
-              i.material-icons.circle.light-blue.darken-4 play_arrow
-            span.title.click-to-call-iq(data-call=item.From) #{item.From}
-            p #{item.TranscriptionText}
-            a.secondary-content.playme(href=item.RecordingUrl,target='_blank')
-              i.material-icons call_made
+          .col.s12
+            .card.grey.lighten-4
+              .card-content
+                p.flow-text #{item.TranscriptionText}
+              .card-action
+                a.waves-effect.waves-light.btn.playme.light-blue.darken-3(href=item.RecordingUrl,data-id=item.CallSid,target='_blank')
+                  i.material-icons.left play_arrow
+                  | Listen
+                a.waves-effect.waves-light.btn.light-blue.darken-3(href='call/' + item.CallSid)
+                  i.material-icons.left textsms
+                  | Comment
+                a.waves-effect.waves-light.btn.light-blue.darken-3.click-to-call-iq(data-call=item.From)
+                  i.material-icons.left perm_phone_msg
+                  | Call
+                a.waves-effect.waves-light.btn.light-blue.darken-3(href='/videochat')
+                  i.material-icons.left videocam
+                  | Video
         else
           li sorry, no records found!

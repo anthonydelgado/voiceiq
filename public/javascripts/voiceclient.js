@@ -18,7 +18,6 @@ $(function () {
 
             Twilio.Device.ready(function (device) {
                 log('Twilio.Device Ready!');
-                $('#call-controls').style.display = 'block';
             });
 
             Twilio.Device.error(function (error) {
@@ -27,14 +26,10 @@ $(function () {
 
             Twilio.Device.connect(function (conn) {
                 log('Successfully established call!');
-                $('#button-call').style.display = 'none';
-                $('#button-hangup').style.display = 'block';
             });
 
             Twilio.Device.disconnect(function (conn) {
                 log('Call ended.');
-                $('#button-call').style.display = 'block';
-                $('#button-hangup').style.display = 'none';
             });
 
             Twilio.Device.incoming(function (conn) {
@@ -59,8 +54,22 @@ $(function () {
     // Bind button to make call
 
     $(document).on('click', '.click-to-call-iq', function () {
+
+        event.preventDefault();
+
+        Twilio.Device.disconnectAll();
+
+
         // get the phone number to connect the call to
         var whoToCall = $(this).attr("data-call");
+
+        $(this).addClass('end-call-iq');
+        $(this).addClass('red');
+
+        $(this).removeClass('light-blue');
+        $(this).removeClass('click-to-call-iq');
+
+        $(this).html('<i class="material-icons left">call_end</i>End');
 
         var params = {
             To: whoToCall
@@ -70,28 +79,38 @@ $(function () {
         Twilio.Device.connect(params);
     });
 
-    // Bind button to hangup call
-    $('#button-hangup').onclick = function () {
-        log('Hanging up...');
+    // Bind button to end call
+
+    $(document).on('click', '.end-call-iq', function () {
+
+        event.preventDefault();
+
         Twilio.Device.disconnectAll();
-    };
+
+        log('Hanging up...');
+
+        $(this).addClass('click-to-call-iq');
+
+        $(this).removeClass('red');
+
+        $(this).addClass('light-blue');
+
+        $(this).html('<i class="material-icons left">perm_phone_msg</i>Call');
+        $(this).removeClass('end-call-iq');
+
+    });
+
 
 });
 
 // Activity log
 function log(message) {
-    // var logDiv = $('#log');
-    // logDiv.innerHTML += '<p>&gt;&nbsp;' + message + '</p>';
-    // logDiv.scrollTop = logDiv.scrollHeight;
-
     Materialize.toast(message, 4000);
 }
 
 // Set the client name in the UI
 function setClientNameUI(clientName) {
-    // var div = $('#client-name');
-    // div.innerHTML = 'Your client name: <strong>' + clientName +
-    //     '</strong>';
+    console.log('Your client name:' + clientName);
 }
 
 

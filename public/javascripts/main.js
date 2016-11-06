@@ -26,7 +26,7 @@ function soundEffect(filename,id) {
     document.getElementById(id).addEventListener('ended', function () {
         // alert('done!');
         var buttonIQ = $("a[data-id='" + id +"']");
-        buttonIQ.html('<i class="material-icons circle light-blue darken-4">play_arrow</i>');
+        buttonIQ.html('<i class="material-icons left">play_arrow</i> Listen');
         buttonIQ.addClass('replayme');
         buttonIQ.removeClass('pauseme');
 
@@ -55,7 +55,7 @@ $(document).on('click', '.replayme', function () {
 
     var callID = $(this).attr("data-id");
 
-    $(this).html('<i class="material-icons circle light-blue darken-3">pause</i>');
+    $(this).html('<i class="material-icons left">pause</i> Pause');
     $(this).addClass('pauseme');
     $(this).removeClass('replayme');
     // pause
@@ -73,7 +73,7 @@ $(document).on('click', '.playme', function () {
 
     var callID = $(this).attr("data-id");
 
-    $(this).html('<i class="material-icons circle light-blue darken-3">pause</i>');
+    $(this).html('<i class="material-icons left">pause</i> Pause');
     $(this).addClass('pauseme');
     $(this).removeClass('playme');
     // pause
@@ -90,7 +90,7 @@ $(document).on('click', '.pauseme', function () {
     // var mp3 = $(this).attr("href");
     var callID = $(this).attr("data-id");
 
-    $(this).html('<i class="material-icons circle light-blue darken-4">play_arrow</i>');
+    $(this).html('<i class="material-icons left">play_arrow</i> Resume');
     $(this).addClass('replayme');
     $(this).removeClass('pauseme');
     // pause

@@ -1,0 +1,21 @@
+extends videolayout
+
+block content
+
+
+    .container
+      #remote-media.row
+      #controls.row
+        #preview.col.s6
+          #local-media
+          br
+          button#button-preview.btn.grey.btn-ghost Preview Cam
+        .col.s6
+          ul#userlist.collection.with-header.m0
+          #room-controls
+            br
+            input#room-name(type='hidden', value='hacknjit')
+            button#button-join.btn.btn-ghost Join Room
+            button#button-leave.btn.btn-ghost Leave Room
+      .row
+        #log.hide
