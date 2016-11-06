@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  .container
+    h3.center Ask a question
+    p.lead.center Ask questions, get answers, help others and connect with people who have similar interests.
+    br
+    form(role='form', action="/add",method="post" )
+      //.row
+      //  .input-field.col.s12
+      //    textarea#question.materialize-textarea(length='140',name='question')
+      //    label(for='question') What is your question?
+      .row
+        .col.s12
+          .row
+            .input-field.col.s12
+              i.material-icons.prefix textsms
+              input#question.autocomplete(type='text',length='140',name='question')
+              label(for='question') What is your question?
+
+      button.btn.btn-large.grey.right(type='submit') Ask

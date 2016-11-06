@@ -2,7 +2,9 @@ require('dotenv').load();
 var express = require('express');
 var passport = require('passport');
 var Account = require('../models/account');
+var Question = require('../models/questions');
 var CallRecord = require('../models/callrecords');
+var Transcription = require('../models/transcription');
 
 var bodyParser = require('body-parser');
 var gravatar = require('gravatar');
@@ -18,7 +20,6 @@ var router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }));
 
 var capability = new twilio.Capability(accountSid, authToken);
-
 
 
 /* GET home page. */
@@ -139,15 +140,98 @@ router.post('/incoming', function (req, res) {
 
     res.set('Content-Type', 'text/xml');
     res.send(twiml.toString());
-        //
-        // var twiml = new twilio.TwimlResponse();
-        //
-        // twiml.say('Hi!  Thanks for checking out my app!')
-        //     .play('http://myserver.com/mysong.mp3');
-        //
-        // res.type('text/xml');
-        // res.send(twiml.toString());
 
+});
+
+
+
+router.post('/incomingcall', function (req, res) {
+
+
+    // Create TwiML response
+    var twiml = new twilio.TwimlResponse();
+
+    twiml.say("Thanks for calling!")
+        .say('Welcome to the NJIT Live Advisor Hot Line. Please leave your question after the tone and we will try to connect you with an expert.', {
+            voice:'woman',
+            language:'en-gb'
+        })
+        .record({
+            maxLength:120,
+            playBeep: true,
+            transcribe: true,
+            transcribeCallback:'/saverecording'
+        });
+
+
+    res.set('Content-Type', 'text/xml');
+    res.send(twiml.toString());
+
+});
+
+router.get('/allrecordings', function (req, res) {
+
+    var query = Transcription.find().limit(10);
+
+    // res.json(JSON.stringify(query));
+    res.send(query);
+});
+
+router.post('/saverecording', function(req, res) {
+
+        var userTranscription = new Transcription({
+            TranscriptionSid: req.body.TranscriptionSid,
+            TranscriptionText:   req.body.TranscriptionText,
+            TranscriptionStatus:   req.body.TranscriptionStatus,
+            TranscriptionUrl:   req.body.TranscriptionUrl,
+            RecordingSid:   req.body.RecordingSid,
+            RecordingUrl:   req.body.RecordingUrl,
+            CallSid:   req.body.CallSid,
+            AccountSid:   req.body.AccountSid,
+            From:   req.body.From,
+            To:   req.body.To,
+            CallStatus:   req.body.CallStatus,
+            ApiVersion:   req.body.ApiVersion,
+            Direction:   req.body.Direction
+        });
+
+        userTranscription.save(function (err, data) {
+            if (err) res.sendStatus(500);
+            else res.sendStatus(200);
+        });
+
+});
+
+
+router.get('/add', function(req, res) {
+    res.render('add', { });
+    // Quentions
+});
+
+
+
+router.post('/add', function(req, res) {
+
+    if(req.user){
+        var userQuestion = new Question({
+            body : req.body.question,
+            author : req.user.username,
+            comments : [],
+            hidden: false,
+            meta: {
+                votes: 0,
+                favs:  0
+            }
+        });
+
+        userQuestion.save(function (err, data) {
+            if (err) res.send(err);
+            else res.send('Your question has been saved!');
+
+        });
+    }else{
+        res.send('You must be logged in to ask a question.');
+    }
 
 });
 
