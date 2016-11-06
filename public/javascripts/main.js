@@ -79,9 +79,11 @@ $(function () {
 
 // Activity log
 function log(message) {
-    var logDiv = document.getElementById('log');
-    logDiv.innerHTML += '<p>&gt;&nbsp;' + message + '</p>';
-    logDiv.scrollTop = logDiv.scrollHeight;
+    // var logDiv = document.getElementById('log');
+    // logDiv.innerHTML += '<p>&gt;&nbsp;' + message + '</p>';
+    // logDiv.scrollTop = logDiv.scrollHeight;
+
+    Materialize.toast(message, 4000);
 }
 
 // Set the client name in the UI

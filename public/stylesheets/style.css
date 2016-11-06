@@ -6,14 +6,11 @@ p {
     margin: 0;
 }
 
-body {
-    /*background: #272726;*/
-}
 
 div#controls {
     padding: 3em;
-    max-width: 1200px;
     margin: 0 auto;
+    background: #272726;
 }
 
 div#controls div {

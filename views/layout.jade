@@ -56,16 +56,18 @@ html
 
     .container
       block content
-    #controls
-      #info
-        p.instructions Twilio Client
-        #client-name
-      #call-controls
-        p.instructions Make a Call:
-        input#phone-number(type='text', placeholder='Enter a phone # or client name')
-        button#button-call Call
-        button#button-hangup Hangup
-      #log
+    .container
+      .row
+        .col.s12#controls
+          #info
+            p.instructions Twilio Client
+            #client-name
+          #call-controls
+            p.instructions Make a Call:
+            input#phone-number(type='text', placeholder='Enter a phone # or client name')
+            button#button-call Call
+            button#button-hangup Hangup
+          #log
 
 
     script(src='bower_components/jquery/dist/jquery.js')

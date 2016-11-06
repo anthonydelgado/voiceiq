@@ -15,6 +15,7 @@ var client = require('twilio')(accountSid, authToken);
 var twilio = require('twilio');
 var router = express.Router();
 
+router.use(bodyParser.urlencoded({ extended: false }));
 
 var capability = new twilio.Capability(accountSid, authToken);
 
@@ -59,11 +60,11 @@ router.get('/google', function (req, res) {
  */
 
 
-app.get('/token', function(request, response) {
+router.get('/token', function(req, res) {
 
     if(req.user) {
 
-        var identity = req.user.username;
+        var identity = req.user.id;
 
         var capability = new twilio.Capability(accountSid, authToken);
         capability.allowClientOutgoing(twimlAppSID);
@@ -71,14 +72,14 @@ app.get('/token', function(request, response) {
         var token = capability.generate();
 
         // Include identity and token in a JSON response
-        response.send({
+        res.send({
             identity: identity,
             token: token
         });
     }else{
 
         // Include identity and token in a JSON response
-        response.send({
+        res.send({
             identity: '',
             token: ''
         });
@@ -123,7 +124,7 @@ router.post('/incoming', function (req, res) {
     var twiml = new twilio.TwimlResponse();
 
     if(req.body.To) {
-        twiml.dial({ callerId: 'client:tommy'}, function() {
+        twiml.dial({ callerId: '+12018758684'}, function() {
             // wrap the phone number or client name in the appropriate TwiML verb
             // by checking if the number given has only digits and format symbols
             if (/^[\d\+\-\(\) ]+$/.test(req.body.To)) {
@@ -150,7 +151,9 @@ router.post('/incoming', function (req, res) {
 
 });
 
-
+router.get('/register', function(req, res) {
+    res.render('register', { });
+});
 
 router.post('/register', function(req, res) {
     Account.register(new Account({ username : req.body.username , mentor : req.body.mentor , student : req.body.student }), req.body.password, function(err, account) {
