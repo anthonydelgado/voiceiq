@@ -12,8 +12,8 @@ $(function () {
     log('Requesting Capability Token...');
     $.getJSON('/token')
         .done(function (data) {
-            log('Got a token.');
-            console.log('Token: ' + data.token);
+            // log('Got a token.');
+            log('Token: ' + data.token);
 
             // Setup Twilio.Device
             Twilio.Device.setup(data.token);
@@ -30,12 +30,12 @@ $(function () {
             Twilio.Device.connect(function (conn) {
                 log('Successfully established call!');
                 document.getElementById('button-call').style.display = 'none';
-                document.getElementById('button-hangup').style.display = 'inline';
+                document.getElementById('button-hangup').style.display = 'block';
             });
 
             Twilio.Device.disconnect(function (conn) {
                 log('Call ended.');
-                document.getElementById('button-call').style.display = 'inline';
+                document.getElementById('button-call').style.display = 'block';
                 document.getElementById('button-hangup').style.display = 'none';
             });
 
@@ -59,15 +59,18 @@ $(function () {
         });
 
     // Bind button to make call
-    document.getElementById('button-call').onclick = function () {
+
+    $(document).on('click', '.click-to-call-iq', function () {
         // get the phone number to connect the call to
+        var whoToCall = $(this).attr("data-call");
+
         var params = {
-            To: document.getElementById('phone-number').value
+            To: whoToCall
         };
 
-        console.log('Calling ' + params.To + '...');
+        log('Calling ' + params.To + '...');
         Twilio.Device.connect(params);
-    };
+    });
 
     // Bind button to hangup call
     document.getElementById('button-hangup').onclick = function () {
@@ -100,14 +103,58 @@ function addSource(elem, path) {
     $('<source />').attr('src', path).appendTo(elem);
 }
 
-function soundEffect(filename) {
+function soundEffect(filename,id) {
     // use jQuery to insert an HTML5 audio element into the DOM
     var player = $('<audio />', {
         autoPlay : 'autoplay'
     });
+    player.attr('id', id);
+
     addSource(player, filename);
     $(player).appendTo("body");
+    document.getElementById(id).addEventListener('ended', function () {
+        // alert('done!');
+        var buttonIQ = $("a[data-id='" + id +"']");
+        buttonIQ.html('<i class="material-icons circle light-blue darken-4">play_arrow</i>');
+        buttonIQ.addClass('replayme');
+        buttonIQ.removeClass('pauseme');
+
+    });
 }
+
+
+
+function playAudio(id) {
+
+    var x = document.getElementById(id);
+
+    x.play();
+}
+
+function pauseAudio(id) {
+
+    var x = document.getElementById(id);
+
+    x.pause();
+}
+
+$(document).on('click', '.replayme', function () {
+
+    event.preventDefault();
+
+    // var mp3 = $(this).attr("href");
+
+    var callID = $(this).attr("data-id");
+
+    $(this).html('<i class="material-icons circle light-blue darken-3">pause</i>');
+    $(this).addClass('pauseme');
+    $(this).removeClass('replayme');
+    // pause
+    // console.log(mp3);
+    playAudio(callID);
+
+});
+
 
 $(document).on('click', '.playme', function () {
 
@@ -115,8 +162,32 @@ $(document).on('click', '.playme', function () {
 
     var mp3 = $(this).attr("href");
 
+    var callID = $(this).attr("data-id");
+
+    $(this).html('<i class="material-icons circle light-blue darken-3">pause</i>');
+    $(this).addClass('pauseme');
+    $(this).removeClass('playme');
+    // pause
     // console.log(mp3);
-    soundEffect(mp3);
+    soundEffect(mp3,callID);
+
+});
+
+
+$(document).on('click', '.pauseme', function () {
+
+    event.preventDefault();
+
+    // var mp3 = $(this).attr("href");
+    var callID = $(this).attr("data-id");
+
+    $(this).html('<i class="material-icons circle light-blue darken-4">play_arrow</i>');
+    $(this).addClass('replayme');
+    $(this).removeClass('pauseme');
+    // pause
+    // console.log(mp3);
+    // soundEffect(mp3);
+    pauseAudio(callID);
 
 });
 

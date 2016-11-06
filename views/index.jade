@@ -31,9 +31,9 @@ block content
       ul.collection
         for item in list
           li.collection-item.avatar
-            a.playme(href=item.RecordingUrl,target='_blank')
+            a.playme(href=item.RecordingUrl,data-id=item.CallSid,target='_blank')
               i.material-icons.circle.light-blue.darken-4 play_arrow
-            span.title #{item.From}
+            span.title.click-to-call-iq(data-call=item.From) #{item.From}
             p #{item.TranscriptionText}
             a.secondary-content.playme(href=item.RecordingUrl,target='_blank')
               i.material-icons call_made

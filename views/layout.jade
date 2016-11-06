@@ -66,9 +66,12 @@ html
             p.instructions Make a Call:
             input#phone-number(type='text', placeholder='Enter a phone # or client name')
             button#button-call Call
-            button#button-hangup Hangup
-          //#log
+            //button#button-hangup Hangup
+            a.waves-effect.waves-light.btn-large.red#button-hangup
+              i.material-icons.left call_end
+              |  End Call
 
+          //#log
 
     script(src='bower_components/jquery/dist/jquery.js')
     script(src='/bower_components/materialize/dist/js/materialize.js')

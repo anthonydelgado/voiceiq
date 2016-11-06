@@ -5,7 +5,9 @@ p {
     padding: 0;
     margin: 0;
 }
-
+.click-to-call-iq:hover {
+    cursor:pointer;
+}
 
 div#controls {
     padding: 3em;
@@ -77,7 +79,7 @@ div#controls div#call-controls button {
     border: 1px solid #686865;
 }
 
-div#controls div#call-controls button#button-hangup {
+#button-hangup {
     display: none;
 }
 
