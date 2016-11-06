@@ -11,12 +11,21 @@ block content
                 a.waves-effect.waves-light.btn.playme.light-blue.darken-3(href=call.RecordingUrl,data-id=call.CallSid,target='_blank')
                   i.material-icons.left play_arrow
                   | Listen
-                a.waves-effect.waves-light.btn.light-blue.darken-3(href='call/' + call.CallSid)
-                  i.material-icons.left textsms
-                  | Comment
                 a.waves-effect.waves-light.btn.light-blue.darken-3.click-to-call-iq(data-call=call.From)
                   i.material-icons.left perm_phone_msg
                   | Call
-                a.waves-effect.waves-light.btn.light-blue.darken-3
+                a.waves-effect.waves-light.btn.light-blue.darken-3(href='/webrtc')
                   i.material-icons.left videocam
                   | Video
+      .row
+        .col.s12#comment-iq
+      .row
+        form.col.s12
+          .row
+            .input-field.col.s12
+              i.material-icons.prefix mode_edit
+              textarea#text.materialize-textarea
+              label(for='text') Answer this question
+            a.waves-effect.waves-light.btn.light-blue.darken-3.right#send-text-iq(data-to=call.From)
+              i.material-icons.left textsms
+              | Send Comment

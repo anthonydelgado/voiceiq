@@ -26,7 +26,6 @@ router.use(bodyParser.urlencoded({ extended: false }));
 
 var capability = new twilio.Capability(accountSid, authToken);
 
-
 /* GET home page. */
 
 router.get('/', function (req, res) {
@@ -37,6 +36,9 @@ router.get('/', function (req, res) {
         // res.json(JSON.stringify(query));
         // res.send(query.emitted.fulfill[0]);
         var qList = query.emitted.fulfill[0];
+
+
+
 
         if(req.user){
 
@@ -198,6 +200,17 @@ router.get('/callrecordings', function (req, res) {
 
 });
 
+router.post('/sms', function (req, res) {
+
+    if(req.body.To) {
+        client.sendMessage({
+            to: req.body.To,
+            from: '+19732334421',
+            body: req.body.text
+        });
+    }
+    res.send('Your message has been sent!');
+});
 
 router.post('/incoming', function (req, res) {
 

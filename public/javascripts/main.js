@@ -5,6 +5,45 @@
 
 $(document).ready(function () {
 
+
+    function makered(text,color = 'red') {
+        return '<span class="' + color + '-text">' + text + '</span>';
+    }
+    function triggerIQ(text,color = 'red') {
+        document.body.innerHTML = document.body.innerHTML.replace(text, makered(text,color));
+    }
+
+    triggerIQ('bullying');
+    triggerIQ('drunk');
+    triggerIQ('scared');
+    triggerIQ('alone');
+    triggerIQ('bully');
+    triggerIQ('rape');
+    triggerIQ('fear');
+    triggerIQ('sad');
+    triggerIQ('mad');
+    triggerIQ('stressed');
+    triggerIQ('stressed out');
+    triggerIQ('relationship', 'blue');
+    triggerIQ('Linux', 'green');
+    triggerIQ('computer science', 'green');
+
+    triggerIQ('broke up');
+    triggerIQ('really stressed');
+
+    triggerIQ('fight');
+    triggerIQ('girlfriend', 'blue');
+
+
+    triggerIQ('tomorrow', 'blue');
+    triggerIQ('Saturday', 'blue');
+    triggerIQ('Sunday', 'blue');
+    triggerIQ('Monday', 'blue');
+    triggerIQ('Tuesday', 'blue');
+    triggerIQ('Wednesday', 'blue');
+    triggerIQ('Thursday', 'blue');
+    triggerIQ('Friday', 'blue');
+
 // Initialize collapse button
 $(".button-collapse").sideNav();
 
@@ -110,5 +149,28 @@ $.get( "../allrecordings", function( data ) {
 
 });
 
+// Activity log
+    function log(message) {
+        Materialize.toast(message, 4000);
+    }
+
+
+
+    $(document).on('click', '#send-text-iq', function () {
+
+        event.preventDefault();
+        var text = $('#text').val();
+        // log(text);
+        var callID = $(this).attr("data-to");
+
+        // log(callID);
+
+        $.post( "../sms", { text: text, To: callID })
+            .done(function( data ) {
+                log( data );
+            });
+        $('#comment-iq').html('<div class="card grey lighten-4"><div class="card-content"><p class="flow-text">' + text + '</p></div></div>')
+        $('#text').val('');
+    });
 
 }); //DOC READY
