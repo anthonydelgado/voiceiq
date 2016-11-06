@@ -26,7 +26,10 @@ $(document).ready(function () {
     triggerIQ('stressed out');
     triggerIQ('relationship', 'blue');
     triggerIQ('Linux', 'green');
+    triggerIQ('calculus homework', 'green');
     triggerIQ('computer science', 'green');
+    triggerIQ('homework', 'green');
+    triggerIQ('calculus', 'green');
 
     triggerIQ('broke up');
     triggerIQ('really stressed');
@@ -43,6 +46,9 @@ $(document).ready(function () {
     triggerIQ('Wednesday', 'blue');
     triggerIQ('Thursday', 'blue');
     triggerIQ('Friday', 'blue');
+    triggerIQ('new friend', 'blue');
+
+
 
 // Initialize collapse button
 $(".button-collapse").sideNav();
