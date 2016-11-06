@@ -92,3 +92,40 @@ function setClientNameUI(clientName) {
     div.innerHTML = 'Your client name: <strong>' + clientName +
         '</strong>';
 }
+
+
+// Adds a source element, and appends it to the audio element, represented
+// by elem.
+function addSource(elem, path) {
+    $('<source />').attr('src', path).appendTo(elem);
+}
+
+function soundEffect(filename) {
+    // use jQuery to insert an HTML5 audio element into the DOM
+    var player = $('<audio />', {
+        autoPlay : 'autoplay'
+    });
+    addSource(player, filename);
+    $(player).appendTo("body");
+}
+
+$(document).on('click', '.playme', function () {
+
+    event.preventDefault();
+
+    var mp3 = $(this).attr("href");
+
+    // console.log(mp3);
+    soundEffect(mp3);
+
+});
+
+$(document).on('click', '.showlist', function () {
+
+$.get( "../allrecordings", function( data ) {
+    // $( ".result" ).html( data );
+    // alert( "Load was performed." );
+    console.log(data);
+});
+
+});

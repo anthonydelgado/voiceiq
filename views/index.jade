@@ -22,11 +22,20 @@ block content
 
   if (user)
     .container
-      h3.center Connect with to VoiceIQ
-      p.flow-text.center You are currently logged in as #{user.username}
+      //h3.center Connect with to VoiceIQ
+      //p.flow-text.center You are currently logged in as #{user.username}
       .row.center
         a(href="/logout").btn.light-blue.darken-4 Logout
         br
-
-
-    include  templates/room.html
+    .container
+      ul.collection
+        for item in list
+          li.collection-item.avatar
+            a.playme(href=item.RecordingUrl,target='_blank')
+              i.material-icons.circle.light-blue.darken-4 play_arrow
+            span.title #{item.From}
+            p #{item.TranscriptionText}
+            a.secondary-content.playme(href=item.RecordingUrl,target='_blank')
+              i.material-icons call_made
+        else
+          li sorry, no records found!

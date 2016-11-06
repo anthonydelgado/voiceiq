@@ -25,15 +25,28 @@ var capability = new twilio.Capability(accountSid, authToken);
 /* GET home page. */
 
 router.get('/', function (req, res) {
-    if(req.user){
-        capability.allowClientIncoming(req.user.username);
-        var token = capability.generate();
-        var gravatarImage = gravatar.url(req.user.username, {s: '200', r: 'pg', d: 'retro'});
-    }else{
-        var gravatarImage = gravatar.url('emerleite@gmail.com', {s: '200', r: 'pg', d: 'retro'});
-        var token = '';
-    }
-    res.render('index', { user : req.user, grav : gravatarImage, twiliotoken: token });
+
+
+    var query = Transcription.find().limit(10).exec(function () {
+
+        // res.json(JSON.stringify(query));
+        // res.send(query.emitted.fulfill[0]);
+        var qList = query.emitted.fulfill[0];
+
+        if(req.user){
+            capability.allowClientIncoming(req.user.username);
+            var token = capability.generate();
+            var gravatarImage = gravatar.url(req.user.username, {s: '200', r: 'pg', d: 'retro'});
+        }else{
+            var gravatarImage = gravatar.url('emerleite@gmail.com', {s: '200', r: 'pg', d: 'retro'});
+            var token = '';
+        }
+        res.render('index', { user : req.user, grav : gravatarImage, twiliotoken: token, list: qList });
+
+
+    });
+
+
 });
 
 var google_speech = require('google-speech');
@@ -171,10 +184,12 @@ router.post('/incomingcall', function (req, res) {
 
 router.get('/allrecordings', function (req, res) {
 
-    var query = Transcription.find().limit(10);
+    var query = Transcription.find().limit(10).exec(function () {
 
-    // res.json(JSON.stringify(query));
-    res.send(query);
+        // res.json(JSON.stringify(query));
+        res.send(query.emitted.fulfill[0]);
+    });
+
 });
 
 router.post('/saverecording', function(req, res) {
