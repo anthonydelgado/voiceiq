@@ -4,11 +4,13 @@ var passport = require('passport');
 var Account = require('../models/account');
 var CallRecord = require('../models/callrecords');
 
+var bodyParser = require('body-parser');
 var gravatar = require('gravatar');
 
 var accountSid = 'AC920c9920faf15270c5394f690187585b';
 var authToken = "2a97b37e4a7cdd9bbd18b5b64cca1369";
 var twimlAppSID = 'AP453137dfea43ec9d76b2b038f872c08f';
+// https://www.twilio.com/console/phone-numbers/dev-tools/twiml-apps
 var client = require('twilio')(accountSid, authToken);
 var twilio = require('twilio');
 var router = express.Router();
@@ -55,9 +57,11 @@ router.get('/google', function (req, res) {
  Generate a Capability Token for a Twilio Client user - it generates a random
  username for the client requesting a token.
  */
-router.get('/token', function(req, res) {
 
-    if(req.user){
+
+app.get('/token', function(request, response) {
+
+    if(req.user) {
 
         var identity = req.user.username;
 
@@ -67,19 +71,23 @@ router.get('/token', function(req, res) {
         var token = capability.generate();
 
         // Include identity and token in a JSON response
-        res.send({
+        response.send({
             identity: identity,
             token: token
         });
-
     }else{
-        res.send({
+
+        // Include identity and token in a JSON response
+        response.send({
             identity: '',
             token: ''
         });
+
     }
 
 });
+
+
 
 router.get('/recordings', function (req, res) {
     client.recordings.list(function(err, data) {
