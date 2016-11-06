@@ -3,8 +3,8 @@ html
   head
     title= title
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    link(rel='stylesheet', href='/bower_components/materialize/dist/css/materialize.min.css')
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='../bower_components/materialize/dist/css/materialize.min.css')
+    link(rel='stylesheet', href='../stylesheets/style.css')
     link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
   body
 
@@ -43,37 +43,71 @@ html
         li
           a(href='#!')
             i.material-icons cloud
-            | First Link With Icon
-        li
-          a(href='#!') Second Link
+            | Make a Call
         li
           .divider
         li
-          a.subheader Subheader
+          .row
+            .col.s4
+              a.btn-floating.btn-large.waves-effect.waves-light.light-blue.darken-4.dial(data-value='1')
+                i.center.white-text.d-pad 1
+            .col.s4
+              a.btn-floating.btn-large.waves-effect.waves-light.light-blue.darken-4.dial(data-value='2')
+                i.center.white-text.d-pad 2
+            .col.s4
+              a.btn-floating.btn-large.waves-effect.waves-light.light-blue.darken-4.dial(data-value='3')
+                i.center.white-text.d-pad 3
+
+            .col.s4
+              a.btn-floating.btn-large.waves-effect.waves-light.light-blue.darken-4.dial(data-value='4')
+                i.center.white-text.d-pad 4
+            .col.s4
+              a.btn-floating.btn-large.waves-effect.waves-light.light-blue.darken-4.dial(data-value='5')
+                i.center.white-text.d-pad 5
+            .col.s4
+              a.btn-floating.btn-large.waves-effect.waves-light.light-blue.darken-4.dial(data-value='6')
+                i.center.white-text.d-pad 6
+
+            .col.s4
+              a.btn-floating.btn-large.waves-effect.waves-light.light-blue.darken-4.dial(data-value='7')
+                i.center.white-text.d-pad 7
+            .col.s4
+              a.btn-floating.btn-large.waves-effect.waves-light.light-blue.darken-4.dial(data-value='8')
+                i.center.white-text.d-pad 8
+            .col.s4
+              a.btn-floating.btn-large.waves-effect.waves-light.light-blue.darken-4.dial(data-value='9')
+                i.center.white-text.d-pad 9
+
+            .col.s4
+              a.btn-floating.btn-large.waves-effect.waves-light.light-blue.darken-4.dial(data-value='*')
+                i.center.white-text.d-pad *
+            .col.s4
+              a.btn-floating.btn-large.waves-effect.waves-light.light-blue.darken-4.dial(data-value='0')
+                i.center.white-text.d-pad 0
+            .col.s4
+              a.btn-floating.btn-large.waves-effect.waves-light.light-blue.darken-4.dial(data-value='#')
+                i.center.white-text.d-pad #
+
         li
           a.waves-effect(href='#!') Third Link With Waves
-
+        #call-controls
+          p.instructions Make a Call:
+          input#phone-number(type='text', placeholder='Enter a phone # or client name')
+          a.waves-effect.waves-light.btn-large.green#button-call Make a call
+          //button#button-hangup Hangup
+          a.waves-effect.waves-light.btn-large.red#button-hangup
+            i.material-icons.left call_end
+            |  End Call
 
     .container
       block content
-    .container
-      .row
-        .col.s12#controls
-          #info
-            p.instructions Twilio Client
-            #client-name
-          #call-controls
-            p.instructions Make a Call:
-            input#phone-number(type='text', placeholder='Enter a phone # or client name')
-            button#button-call Call
-            //button#button-hangup Hangup
-            a.waves-effect.waves-light.btn-large.red#button-hangup
-              i.material-icons.left call_end
-              |  End Call
+
 
           //#log
 
-    script(src='bower_components/jquery/dist/jquery.js')
-    script(src='/bower_components/materialize/dist/js/materialize.js')
+    script(src='../bower_components/jquery/dist/jquery.js')
+    script(src='../bower_components/materialize/dist/js/materialize.js')
+    script(src='../javascripts/main.js')
+  if (user)
     script(src='https://media.twiliocdn.com/sdk/js/client/v1.3/twilio.min.js')
-    script(src='/javascripts/main.js')
+    script(src='../javascripts/voiceclient.js')

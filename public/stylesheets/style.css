@@ -8,7 +8,9 @@ p {
 .click-to-call-iq:hover {
     cursor:pointer;
 }
-
+.d-pad {
+    margin-left: -27px !important;
+}
 div#controls {
     padding: 3em;
     margin: 0 auto;

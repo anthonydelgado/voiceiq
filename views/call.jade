@@ -1,0 +1,13 @@
+extends layout
+
+block content
+
+    .container
+      ul.collection
+          li.collection-item.avatar
+            a.playme(href=call.RecordingUrl,data-id=call.CallSid,target='_blank')
+              i.material-icons.circle.light-blue.darken-4 play_arrow
+            span.title.click-to-call-iq(data-call=call.From) #{call.From}
+            p #{call.TranscriptionText}
+            a.secondary-content.playme(href=call.RecordingUrl,target='_blank')
+              i.material-icons call_made

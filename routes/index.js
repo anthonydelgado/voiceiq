@@ -49,6 +49,25 @@ router.get('/', function (req, res) {
 
 });
 
+//
+
+
+
+router.get('/call/:sid', function (req, res) {
+
+    // find each Transcription with a CallSid matching url
+    var query = Transcription.findOne({ 'CallSid': req.params.sid }).exec(function () {
+
+        var calldata = query.emitted.fulfill[0];
+
+        res.render('call', { user : req.user, call: calldata });
+
+    });
+
+
+
+});
+
 var google_speech = require('google-speech');
 
 
