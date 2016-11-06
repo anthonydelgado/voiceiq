@@ -108,7 +108,7 @@ router.get('/callrecordings', function (req, res) {
 });
 
 
-router.get('/incoming', function (req, res) {
+router.post('/incoming', function (req, res) {
 
 
     // Create TwiML response
@@ -141,32 +141,7 @@ router.get('/incoming', function (req, res) {
 
 
 });
-
-router.post('/incoming', function (req, res) {
-
-    //Validate that this request really came from Twilio...
-    if (twilio.validateExpressRequest(req, '2a97b37e4a7cdd9bbd18b5b64cca1369')) {
-        var twiml = new twilio.TwimlResponse();
-
-        twiml.say('Hi!  Thanks for checking out my app!')
-            .play('http://demo.twilio.com/hellomonkey/monkey.mp3');
-
-        res.type('text/xml');
-        res.send(twiml.toString());
-    }
-    else {
-        var twiml = new twilio.TwimlResponse();
-
-        twiml.say('you are not twilio.  Buzz off.')
-            .play('http://demo.twilio.com/hellomonkey/monkey.mp3');
-
-        res.type('text/xml');
-        res.send(twiml.toString());
-
-    }
-
-
-});
+ 
 
 
 router.post('/register', function(req, res) {
