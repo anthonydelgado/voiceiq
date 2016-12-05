@@ -24,6 +24,7 @@
     "passport-local-mongoose": "^4.0.0",
     "serve-favicon": "^2.3.0",
     "twilio": "^2.11.0",
-    "twilio-video": "^1.0.0-beta2"
+    "twilio-video": "^1.0.0-beta2",
+    "watson-developer-cloud": "^2.11.0"
   }
 }

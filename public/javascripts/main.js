@@ -5,6 +5,7 @@
 
 $(document).ready(function () {
 
+    $('.collapsible').collapsible();
 
     function makered(text,color = 'red') {
         return '<span class="' + color + '-text">' + text + '</span>';

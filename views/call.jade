@@ -17,6 +17,16 @@ block content
                 a.waves-effect.waves-light.btn.light-blue.darken-3(href='/webrtc')
                   i.material-icons.left videocam
                   | Video
+          .col.s12
+
+            ul.collection
+
+              for item in ibm
+                li.collection-item
+                  h5.center= item.name
+                  p.flow-text.center= item.consumption_preferences[0].name
+              else
+                li sorry, no ibm!
       .row
         .col.s12#comment-iq
       .row

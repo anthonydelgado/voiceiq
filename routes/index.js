@@ -15,10 +15,11 @@ var twimlAppSID = 'AP453137dfea43ec9d76b2b038f872c08f';
 // https://www.twilio.com/console/phone-numbers/dev-tools/twiml-apps
 var client = require('twilio')(accountSid, authToken);
 var twilio = require('twilio');
-
-
 var AccessToken = require('twilio').AccessToken;
 var VideoGrant = AccessToken.VideoGrant;
+
+
+var PersonalityInsightsV3 = require('watson-developer-cloud/personality-insights/v3');
 
 var router = express.Router();
 
@@ -56,24 +57,68 @@ router.get('/', function (req, res) {
 
 });
 
+router.get('/login', function(req, res) {
+    res.render('login', { user : req.user });
+});
+
 // Call Page
 router.get('/call/:sid', function (req, res) {
+
+
+    var personality_insights = new PersonalityInsightsV3({
+        "password": "5LeYlPklm5Xb",
+        "username": "dbe195f8-a580-43c2-863d-c9c9b327c9e4",
+        version_date: '2016-10-19'
+    });
+
+    /* personality insights credentials and API
+     {
+     "url": "https://gateway.watsonplatform.net/personality-insights/api",
+
+     }
+     */
+    module.exports = personality_insights;
+
+
 
     // find each Transcription with a CallSid matching url
     var query = Transcription.findOne({ 'CallSid': req.params.sid }).exec(function () {
 
         var calldata = query.emitted.fulfill[0];
 
-        if(req.user){
+        personality_insights.profile({
 
-            var gravatarImage = gravatar.url(req.user.username, {s: '200', r: 'pg', d: 'retro'});
+                text: calldata.TranscriptionText + " " + calldata.TranscriptionText + " " + calldata.TranscriptionText + " " + calldata.TranscriptionText + " " + calldata.TranscriptionText + " " + calldata.TranscriptionText + " " + calldata.TranscriptionText + " " + calldata.TranscriptionText,
 
-            res.render('call', { user : req.user, grav : gravatarImage, call: calldata });
+                consumption_preferences: true
+            },
+            function (err, response) {
+                if (err)
+                    console.log('error:', err);
+                //   res.json(err);
+                else
+                    console.log('cool');
+                //   res.json(response.consumption_preferences);
 
-        }else{
-            res.render('call', { user : req.user, call: calldata });
 
-        }
+
+                // var gravatarImage = gravatar.url(req.user.username, {s: '200', r: 'pg', d: 'retro'});
+
+                if(req.user){
+
+                    var gravatarImage = gravatar.url(req.user.username, {s: '200', r: 'pg', d: 'retro'});
+
+                    res.render('call', { user : req.user, grav : gravatarImage, call: calldata, ibm: response.consumption_preferences });
+
+                }else{
+                    res.render('call', { user : req.user, call: calldata, ibm: response.consumption_preferences });
+
+                }
+
+
+
+            });
+
 
     });
 
@@ -360,6 +405,7 @@ router.post('/register', function(req, res) {
         });
     });
 });
+
 
 router.post('/login', passport.authenticate('local'), function(req, res) {
     res.redirect('/');
