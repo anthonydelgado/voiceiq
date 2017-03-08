@@ -291,7 +291,7 @@ router.post('/incomingcall', function (req, res) {
     var twiml = new twilio.TwimlResponse();
 
     twiml.say("Thanks for calling!")
-        .say('Welcome to the NJIT Live Advisor Hot Line. Please leave your question after the tone and we will try to connect you with an expert.', {
+        .say('Welcome To Newarks Safe Sorority. Where every woman has a voice. State your concern after the tone and we  will anonymously route your request to a safe sister', {
             voice:'woman',
             language:'en-gb'
         })

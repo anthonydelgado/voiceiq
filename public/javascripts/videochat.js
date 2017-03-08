@@ -47,8 +47,9 @@ $.getJSON('/videotoken', function (data) {
                     log('Could not connect to Twilio: ' + error.message);
                 });
         } else {
-            alert('Please enter a room name.');
+            log('Please enter a room name.');
         }
+        document.getElementById('directory').style.display = 'none';
 
     });
     // Bind button to leave room
